@@ -19,7 +19,7 @@ namespace Entidades
         {
             double resultado;
 
-            switch (ValidarOperador(operador[0]))
+            switch (ValidarOperador(operador.FirstOrDefault()))
             {
                 case "-":
                     resultado = num1 - num2;

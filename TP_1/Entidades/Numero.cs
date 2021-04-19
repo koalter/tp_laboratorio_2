@@ -18,7 +18,7 @@ namespace Entidades
             }
         }
 
-        public Numero() 
+        public Numero()
             : this(0)
         {
         }
@@ -77,15 +77,7 @@ namespace Entidades
         {
             if (EsBinario(binario))
             {
-                double resultado = 0;
-
-                string binarioReversed = new string(binario.Reverse().ToArray());
-                for (int i = 0; i < binarioReversed.Length; i++)
-                {
-                    double numero = double.Parse(binarioReversed[i].ToString());
-                    resultado += Math.Pow(2, i) * numero;
-                }
-
+                int resultado = Convert.ToInt32(binario, 2);
                 return resultado.ToString();
             }
             else
@@ -104,16 +96,8 @@ namespace Entidades
         {
             if (numero >= 1)
             {
-                int intNumero = (int)numero;
-                string resultado = string.Empty;
-
-                while (intNumero > 0)
-                {
-                    resultado = resultado.Insert(0, (intNumero % 2).ToString());
-                    intNumero /= 2;
-                }
-
-                return resultado;
+                int numeroInt = Convert.ToInt32(numero);
+                return Convert.ToString(numeroInt, 2);
             }
             else
             {

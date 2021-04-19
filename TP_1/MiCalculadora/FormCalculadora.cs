@@ -60,5 +60,10 @@ namespace MiCalculadora
         {
             return Calculadora.Operar(new Numero(numero1), new Numero(numero2), operador);
         }
+
+        private void FormCalculadora_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
