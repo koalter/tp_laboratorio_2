@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entidades;
 
-namespace TP_02_2018
+namespace TP_02_2021
 {
     class Program
     {
@@ -15,7 +16,7 @@ namespace TP_02_2018
             Console.SetWindowSize(Console.LargestWindowWidth / 2, Console.LargestWindowHeight - 2);
 
             // Nombre del alumno
-            Console.Title = "";
+            Console.Title = "Lorenzo Nahuel Cea Ko";
 
             Taller taller = new Taller(6);
 
