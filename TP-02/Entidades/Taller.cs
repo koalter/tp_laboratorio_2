@@ -11,19 +11,32 @@ namespace Entidades
     /// </summary>
     public class Taller
     {
-        List<Vehiculo> vehiculos;
-        int espacioDisponible;
+        private List<Vehiculo> vehiculos;
+        private int espacioDisponible;
+
         public enum ETipo
         {
-            Moto, Automovil, Camioneta, Todos
+            Ciclomotor,
+            Sedan,
+            SUV,
+            Todos
         }
 
         #region "Constructores"
+        /// <summary>
+        /// Constructor privado por defecto que inicializara una lista nueva para el campo vehiculos
+        /// </summary>
         private Taller()
         {
             this.vehiculos = new List<Vehiculo>();
         }
+
+        /// <summary>
+        /// Constructor público para el objeto Taller, que reutiliza el constructor privado por defecto
+        /// </summary>
+        /// <param name="espacioDisponible">El espacio que tendra el taller</param>
         public Taller(int espacioDisponible)
+            : this()
         {
             this.espacioDisponible = espacioDisponible;
         }
@@ -34,9 +47,9 @@ namespace Entidades
         /// Muestro el estacionamiento y TODOS los vehículos
         /// </summary>
         /// <returns></returns>
-        public string ToString()
+        public override string ToString()
         {
-            return Taller.Listar(this, ETipo.Todos);
+            return this.Listar(this, ETipo.Todos);
         }
         #endregion
 
@@ -59,13 +72,13 @@ namespace Entidades
             {
                 switch (tipo)
                 {
-                    case ETipo.Camioneta:
+                    case ETipo.SUV:
                         sb.AppendLine(v.Mostrar());
                         break;
-                    case ETipo.Moto:
+                    case ETipo.Ciclomotor:
                         sb.AppendLine(v.Mostrar());
                         break;
-                    case ETipo.Automovil:
+                    case ETipo.Sedan:
                         sb.AppendLine(v.Mostrar());
                         break;
                     default:
@@ -74,7 +87,7 @@ namespace Entidades
                 }
             }
 
-            return sb;
+            return sb.ToString();
         }
         #endregion
 
@@ -87,7 +100,7 @@ namespace Entidades
         /// <returns></returns>
         public static Taller operator +(Taller taller, Vehiculo vehiculo)
         {
-            foreach (Vehiculo v in taller)
+            foreach (Vehiculo v in taller.vehiculos)
             {
                 if (v == vehiculo)
                     return taller;
@@ -104,10 +117,11 @@ namespace Entidades
         /// <returns></returns>
         public static Taller operator -(Taller taller, Vehiculo vehiculo)
         {
-            foreach (Vehiculo v in taller)
+            foreach (Vehiculo v in taller.vehiculos)
             {
                 if (v == vehiculo)
                 {
+                    taller.vehiculos.Remove(v);
                     break;
                 }
             }

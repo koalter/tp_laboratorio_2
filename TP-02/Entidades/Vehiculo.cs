@@ -19,9 +19,9 @@ namespace Entidades
         {
             Chico, Mediano, Grande
         }
-        EMarca marca;
-        string chasis;
-        ConsoleColor color;
+        private EMarca marca;
+        private string chasis;
+        private ConsoleColor color;
 
         public Vehiculo(string chasis, EMarca marca, ConsoleColor color)
         {
