@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Entidades
 {
@@ -49,7 +46,7 @@ namespace Entidades
         /// <returns></returns>
         public override string ToString()
         {
-            return Taller.Listar(this, ETipo.Todos);
+            return Listar(this, ETipo.Todos);
         }
         #endregion
 

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Entidades;
 
 namespace TP_02_2021
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // Configuración de la pantalla
             Console.SetWindowPosition(0, 0);

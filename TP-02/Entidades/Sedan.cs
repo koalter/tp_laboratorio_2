@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
-using System.Drawing;
 
 namespace Entidades
 {
@@ -15,7 +10,19 @@ namespace Entidades
             CuatroPuertas, 
             CincoPuertas 
         }
+
         private ETipo tipo;
+
+        /// <summary>
+        /// Sedan son 'Mediano'
+        /// </summary>
+        protected override ETamanio Tamanio
+        {
+            get
+            {
+                return ETamanio.Mediano;
+            }
+        }
 
         /// <summary>
         /// Por defecto, TIPO será CuatroPuertas
@@ -34,25 +41,14 @@ namespace Entidades
             this.tipo = tipo;
         }
 
-        /// <summary>
-        /// Sedan son 'Mediano'
-        /// </summary>
-        protected override ETamanio Tamanio
-        {
-            get
-            {
-                return ETamanio.Mediano;
-            }
-        }
-
         public override sealed string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SEDAN");
             sb.AppendLine(base.Mostrar());
-            sb.AppendFormat("TAMAÑO : {0}", this.Tamanio);
-            sb.AppendLine("TIPO : " + this.tipo);
+            sb.AppendFormat("TAMAÑO : {0}", Tamanio);
+            sb.AppendLine("TIPO : " + tipo);
             sb.AppendLine("");
             sb.AppendLine("---------------------");
 
