@@ -148,7 +148,6 @@ namespace MiCalculadora
             this.MinimizeBox = false;
             this.Name = "FormCalculadora";
             this.Text = "Calculadora de Lorenzo Cea del curso 2°A";
-            this.Load += new System.EventHandler(this.FormCalculadora_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -54,16 +54,12 @@ namespace MiCalculadora
             txtNumero1.ResetText();
             txtNumero2.ResetText();
             cmbOperador.ResetText();
+            lblResultado.ResetText();
         }
 
         private static double Operar(string numero1, string numero2, string operador)
         {
             return Calculadora.Operar(new Numero(numero1), new Numero(numero2), operador);
-        }
-
-        private void FormCalculadora_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
