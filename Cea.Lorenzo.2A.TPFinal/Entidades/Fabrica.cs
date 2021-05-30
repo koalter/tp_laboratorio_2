@@ -40,7 +40,7 @@ namespace Entidades
         {
             bool retorno = false;
 
-            if (this._lista.Count < this._capacidad)
+            if (obj != null && this._lista.Count < this._capacidad)
             {
                 foreach (var elemento in this._lista)
                 {

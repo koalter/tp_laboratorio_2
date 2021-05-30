@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Excepciones;
 
 namespace Entidades
 {
@@ -16,12 +17,21 @@ namespace Entidades
 			{
 				return _megapixeles;
 			}
+			protected set
+            {
+				if (value <= 0 || value > 64)
+                {
+					throw new ValorInvalidoException();
+				}
+
+				_megapixeles = value;
+            }
 		}
 
 		public Celular(string modelo, int ram, int rom, int megapixeles, ETamanio tamanio, EMarca procesador)
 			: base(modelo, ram, rom, tamanio, procesador)
 		{
-			_megapixeles = megapixeles;
+			Megapixeles = megapixeles;
 		}
 
 		public Celular(string modelo, int ram, int rom, int megapixeles, ETamanio tamanio)

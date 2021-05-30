@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Excepciones;
 
 namespace Entidades
 {
@@ -21,6 +22,10 @@ namespace Entidades
 			{
 				return _tamanio;
 			}
+			protected set
+            {
+				_tamanio = value;
+            }
 		}
 
 		public EMarca Procesador
@@ -28,6 +33,10 @@ namespace Entidades
 			get
 			{
 				return _procesador;
+			}
+			protected set
+			{
+				_procesador = value;
 			}
 		}
 
@@ -37,6 +46,15 @@ namespace Entidades
 			{
 				return _ram;
 			}
+			protected set
+            {
+				if (value <= 0 || value > 16)
+                {
+					throw new ValorInvalidoException();
+                }
+				
+				_ram = value;
+            }
 		}
 
 		public int Rom
@@ -44,6 +62,15 @@ namespace Entidades
 			get
 			{
 				return _rom;
+			}
+			protected set
+			{
+				if (value <= 0 || value > 256)
+				{
+					throw new ValorInvalidoException();
+				}
+
+				_rom = value;
 			}
 		}
 
@@ -53,16 +80,25 @@ namespace Entidades
 			{
 				return _modelo;
 			}
+			protected set
+			{
+				if (string.IsNullOrWhiteSpace(value))
+				{
+					throw new ValorInvalidoException();
+				}
+
+				_modelo = value;
+			}
 		}
         #endregion
 
         public Producto(string modelo, int ram, int rom, ETamanio tamanio, EMarca procesador)
 		{
-			_modelo = modelo;
-			_tamanio = tamanio;
-			_procesador = procesador;
-			_ram = ram;
-			_rom = rom;
+			Modelo = modelo;
+			Ram = ram;
+			Rom = rom;
+			Tamanio = tamanio;
+			Procesador = procesador;
 		}
 
 		public static bool operator ==(Producto p1, Producto p2)
