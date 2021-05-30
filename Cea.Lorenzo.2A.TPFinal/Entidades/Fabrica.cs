@@ -22,13 +22,11 @@ namespace Entidades
 			_capacidad = capacidad;
         }
 
-        public static string Imprimir(Fabrica<T> fabrica)
+        public override string ToString()
         {
-            if (fabrica is null) return string.Empty;
-
             StringBuilder sb = new StringBuilder();
 
-            foreach (var elemento in fabrica._lista)
+            foreach (var elemento in _lista)
             {
                 sb.AppendLine($"ITEM: {elemento.GetType().Name}");
                 sb.Append(elemento.ToString());
@@ -69,6 +67,10 @@ namespace Entidades
             {
                 fabrica._lista.Add(obj);
             }
+            else //TODO reemplazar con una excepcion y controlarla
+            {
+                Console.WriteLine("NO FUE POSIBLE AGREGAR EL OBJETO!!!");
+            }
 
             return fabrica;
         }
@@ -79,8 +81,12 @@ namespace Entidades
             {
                 fabrica._lista.RemoveAt(indice);
             }
+            else //TODO reemplazar con una excepcion y controlarla
+            {
+                Console.WriteLine("EL OBJETO NO ESTA INCLUIDO EN LA LISTA!!!");
+            }
 
-            return fabrica;
+                return fabrica;
         }
     }
 }
