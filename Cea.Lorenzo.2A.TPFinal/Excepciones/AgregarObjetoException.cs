@@ -10,11 +10,11 @@ namespace Excepciones
     {
         private string mensajeBase;
 
-        public AgregarObjetoException() : this("NO FUE POSIBLE AGREGAR EL OBJETO!")
+        public AgregarObjetoException() : this("EL OBJETO YA EXISTE!")
         {
         }
 
-        public AgregarObjetoException(Exception e) : this("NO FUE POSIBLE AGREGAR EL OBJETO!", e)
+        public AgregarObjetoException(Exception e) : this("EL OBJETO YA EXISTE!", e)
         {
         }
 

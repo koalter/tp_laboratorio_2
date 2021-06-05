@@ -36,9 +36,30 @@ namespace Test
             fabrica += t1;
             fabrica += s1;
             // No deberia dejar agregar estos objetos
-            fabrica += c2;
-            fabrica += productoInvalido;
-            fabrica += null;
+            try
+            {
+                fabrica += c2;
+            }
+            catch (FabricaLlenaException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                fabrica += productoInvalido;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                fabrica += null;
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             Console.WriteLine(fabrica.ToString());
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
@@ -47,7 +68,14 @@ namespace Test
 
             // Deberia remover t1 e impedir agregar c1 de nuevo al estar ya incluido en la fabrica
             fabrica -= t1;
-            fabrica += c1;
+            try
+            {
+                fabrica += c1;
+            }
+            catch (AgregarObjetoException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             fabrica += c2;
 
@@ -57,7 +85,14 @@ namespace Test
             Console.Clear();
 
             fabrica -= s1;
-            fabrica -= t1; // Deberia arrojar un error por pantalla
+            try //RemoverObjetoException
+            {
+                fabrica -= t1;
+            }
+            catch (RemoverObjetoException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             Console.WriteLine(fabrica.ToString());
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");

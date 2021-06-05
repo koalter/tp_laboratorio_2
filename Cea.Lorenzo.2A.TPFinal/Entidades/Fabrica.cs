@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Excepciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,57 +37,45 @@ namespace Entidades
             return sb.ToString();
         }
 
-        private bool Agregar(T obj)
+        private void Agregar(T obj)
         {
-            bool retorno = false;
+            if (obj is null) throw new NullReferenceException();
 
-            if (obj != null && this._lista.Count < this._capacidad)
+            if (this._lista.Count >= this._capacidad) throw new FabricaLlenaException();
+
+            foreach (var elemento in this._lista)
             {
-                foreach (var elemento in this._lista)
-                {
-                    if (elemento.Equals(obj))
-                        return retorno;
-                }
-
-                retorno = true;
+                if (elemento.Equals(obj))
+                    throw new AgregarObjetoException();
             }
 
-            return retorno;
+            this._lista.Add(obj);
         }
 
-        private bool Remover(T obj, out int indice)
+        private void Remover(T obj)
         {
-            indice = _lista.IndexOf(obj);
+            int indice = _lista.IndexOf(obj);
 
-            return indice > -1;
+            if (indice < 0)
+            {
+                throw new RemoverObjetoException();
+            }
+
+            this._lista.RemoveAt(indice);
         }
 
         public static Fabrica<T> operator +(Fabrica<T> fabrica, T obj)
         {
-            if (fabrica.Agregar(obj))
-            {
-                fabrica._lista.Add(obj);
-            }
-            else //TODO reemplazar con una excepcion y controlarla
-            {
-                Console.WriteLine("NO FUE POSIBLE AGREGAR EL OBJETO!!!");
-            }
+            fabrica.Agregar(obj);
 
             return fabrica;
         }
 
         public static Fabrica<T> operator -(Fabrica<T> fabrica, T obj)
         {
-            if (fabrica.Remover(obj, out int indice))
-            {
-                fabrica._lista.RemoveAt(indice);
-            }
-            else //TODO reemplazar con una excepcion y controlarla
-            {
-                Console.WriteLine("EL OBJETO NO ESTA INCLUIDO EN LA LISTA!!!");
-            }
-
-                return fabrica;
+            fabrica.Remover(obj);
+            
+            return fabrica;
         }
     }
 }
