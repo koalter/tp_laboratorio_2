@@ -29,8 +29,8 @@ namespace Entidades
 
             foreach (var elemento in _lista)
             {
-                sb.AppendLine($"ITEM: {elemento.GetType().Name}");
-                sb.Append(elemento.ToString());
+                sb.AppendLine();
+                sb.AppendLine($"{elemento.GetType().Name}, {elemento}");
                 sb.AppendLine("---------------------");
             }
 

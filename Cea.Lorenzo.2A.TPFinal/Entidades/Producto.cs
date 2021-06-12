@@ -115,18 +115,28 @@ namespace Entidades
 			return !(p1 == p2);
 		}
 
-        public override string ToString()
-        {
+		public override string ToString()
+		{
 			StringBuilder sb = new StringBuilder();
-			
-			sb.AppendLine($"MODELO: {Modelo}");
-			sb.AppendLine($"TAMAÑO: {Tamanio}");
-			sb.AppendLine($"PROCESADOR: {Procesador}");
-			sb.AppendLine($"RAM: {Ram}");
-			sb.AppendLine($"ROM: {Rom}");
+
+			sb.Append($"{Modelo}, {Tamanio}, {Procesador}, {Ram}GB, {Rom}GB");
 			//sb.AppendLine("---------------------");
 
 			return sb.ToString();
-        }
-    }
+		}
+
+		//     public override string ToString()
+		//     {
+		//StringBuilder sb = new StringBuilder();
+
+		//sb.AppendLine($"MODELO: {Modelo}");
+		//sb.AppendLine($"TAMAÑO: {Tamanio}");
+		//sb.AppendLine($"PROCESADOR: {Procesador}");
+		//sb.AppendLine($"RAM: {Ram}");
+		//sb.AppendLine($"ROM: {Rom}");
+		////sb.AppendLine("---------------------");
+
+		//return sb.ToString();
+		//     }
+	}
 }

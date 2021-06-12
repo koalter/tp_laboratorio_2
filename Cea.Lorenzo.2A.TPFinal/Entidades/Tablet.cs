@@ -59,10 +59,18 @@ namespace Entidades
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append(base.ToString());
-			sb.AppendLine($"CAMARA: {Megapixeles}mpx");
+			sb.Append($"{base.ToString()}, {Megapixeles}mpx");
 
 			return sb.ToString();
 		}
+
+		//public override string ToString()
+		//{
+		//	StringBuilder sb = new StringBuilder();
+		//	sb.Append(base.ToString());
+		//	sb.AppendLine($"CAMARA: {Megapixeles}mpx");
+
+		//	return sb.ToString();
+		//}
 	}
 }

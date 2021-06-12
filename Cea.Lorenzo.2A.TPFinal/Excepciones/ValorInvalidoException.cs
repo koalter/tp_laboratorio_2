@@ -14,7 +14,7 @@ namespace Excepciones
         {
         }
 
-        public ValorInvalidoException(Exception e) : this("El valor ingresado es inválido o está vacío!", e)
+        public ValorInvalidoException(Exception e) : this($"El valor ingresado {e.Source} es inválido o está vacío!", e)
         {
         }
 
