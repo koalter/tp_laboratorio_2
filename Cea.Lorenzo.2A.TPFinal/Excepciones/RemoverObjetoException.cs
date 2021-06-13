@@ -8,8 +8,6 @@ namespace Excepciones
 {
     public class RemoverObjetoException : Exception
     {
-        private string mensajeBase;
-
         public RemoverObjetoException() : this("EL OBJETO NO ESTA INCLUIDO EN LA LISTA!")
         {
         }
@@ -20,12 +18,10 @@ namespace Excepciones
 
         public RemoverObjetoException(string mensaje) : base(mensaje)
         {
-            mensajeBase = mensaje;
         }
 
         public RemoverObjetoException(string mensaje, Exception e) : base(mensaje, e)
         {
-            mensajeBase = mensaje;
         }
     }
 }

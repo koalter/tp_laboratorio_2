@@ -11,37 +11,38 @@ namespace Entidades
 	{
 		private int _megapixeles;
 
-		public int Megapixeles
+		public string Megapixeles
 		{
 			get
 			{
-				return _megapixeles;
+				return _megapixeles.ToString();
 			}
 			protected set
 			{
-				if (value <= 0 || value > 64)
+				if (!int.TryParse(value, out int megapixeles)
+					|| (megapixeles <= 0 || megapixeles > 64))
 				{
-					throw new ValorInvalidoException();
+					throw new ValorInvalidoException("Cámara");
 				}
 
-				_megapixeles = value;
+				_megapixeles = megapixeles;
 			}
 		}
 
-		public Tablet(string modelo, int ram, int rom, int megapixeles, EMarca procesador)
-			: base(modelo, ram, rom, ETamanio.Grande, procesador)
+		public Tablet(string modelo, string ram, string rom, string megapixeles, string procesador)
+			: base(modelo, ram, rom, ETamanio.Grande.ToString(), procesador)
 		{
 			Megapixeles = megapixeles;
 		}
 
-		public Tablet(string modelo, int ram, int rom, int megapixeles)
-			: this(modelo, ram, rom, megapixeles, EMarca.Generico)
+		public Tablet(string modelo, string ram, string rom, string megapixeles)
+			: this(modelo, ram, rom, megapixeles, EMarca.Generico.ToString())
 		{ }
 
 		public static bool operator ==(Tablet t1, Tablet t2)
 		{
 			return (Producto)t1 == t2
-				&& t1.Megapixeles == t2.Megapixeles;
+				&& t1._megapixeles == t2._megapixeles;
 		}
 
 		public static bool operator !=(Tablet t1, Tablet t2)
@@ -63,14 +64,5 @@ namespace Entidades
 
 			return sb.ToString();
 		}
-
-		//public override string ToString()
-		//{
-		//	StringBuilder sb = new StringBuilder();
-		//	sb.Append(base.ToString());
-		//	sb.AppendLine($"CAMARA: {Megapixeles}mpx");
-
-		//	return sb.ToString();
-		//}
 	}
 }

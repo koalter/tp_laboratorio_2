@@ -8,8 +8,6 @@ namespace Excepciones
 {
     public class AgregarObjetoException : Exception
     {
-        private string mensajeBase;
-
         public AgregarObjetoException() : this("EL OBJETO YA EXISTE!")
         {
         }
@@ -20,12 +18,10 @@ namespace Excepciones
 
         public AgregarObjetoException(string mensaje) : base(mensaje)
         {
-            mensajeBase = mensaje;
         }
 
         public AgregarObjetoException(string mensaje, Exception e) : base(mensaje, e)
         {
-            mensajeBase = mensaje;
         }
     }
 }

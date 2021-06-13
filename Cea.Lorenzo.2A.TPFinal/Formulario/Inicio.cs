@@ -28,40 +28,50 @@ namespace Formulario
 
             try
             {
-                switch (lblProducto.Text.ToLower())
-                {
-                    case "celular":
-                        producto = new Celular(lblModelo.Text, int.Parse(lblRam.Text),
-                            int.Parse(lblRom.Text), int.Parse(lblCamara.Text),
-                            (ETamanio)Enum.Parse(typeof(ETamanio), lblTamanio.Text),
-                            (EMarca)Enum.Parse(typeof(EMarca), lblProcesador.Text));
-                        break;
-                    case "tablet":
-                        producto = new Tablet(lblModelo.Text, int.Parse(lblRam.Text),
-                            int.Parse(lblRom.Text), int.Parse(lblCamara.Text),
-                            (EMarca)Enum.Parse(typeof(EMarca), lblProcesador.Text));
-                        break;
-                    case "smartwatch":
-                        producto = new SmartWatch(lblModelo.Text,
-                            int.Parse(lblRam.Text), int.Parse(lblRom.Text),
-                            (EMarca)Enum.Parse(typeof(EMarca), lblProcesador.Text));
-                        break;
-                    default:
-                        producto = null;
-                        break;
-                }
+                producto = GenerarProducto();
 
                 fabrica += producto;
+                lbxFabrica.Items.Add(producto);
             }
             catch (Exception ex)
             {
-                throw new ValorInvalidoException(ex);
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private Producto GenerarProducto()
+        {
+            switch (lbxProducto.Text.ToLower())
+            {
+                case "celular":
+                    return new Celular(txtModelo.Text, cbxRam.Text,
+                        cbxRom.Text, cbxCamara.Text, lbxTamanio.Text, lbxProcesador.Text);
+                case "tablet":
+                    return new Tablet(txtModelo.Text, cbxRam.Text,
+                        cbxRom.Text, cbxCamara.Text, lbxProcesador.Text);
+                case "smartwatch":
+                    return new SmartWatch(txtModelo.Text, cbxRam.Text,
+                        cbxRom.Text, lbxProcesador.Text);
+                default:
+                    return null;
             }
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-
+            Producto producto = (Producto)lbxFabrica.SelectedItem;
+            lbxFabrica.Items.Remove(producto);
+            try
+            {
+                fabrica -= producto;
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("No ha seleccionado ningun objeto!", ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (RemoverObjetoException ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnFabricar_Click(object sender, EventArgs e)
@@ -69,20 +79,32 @@ namespace Formulario
 
         }
 
-        private bool VerificarCampos()
+        private void lbxProducto_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(lblModelo.Text)
-                && int.TryParse(lblRam.Text, out int Ram)
-                && int.TryParse(lblRom.Text, out int Rom)
-                && int.TryParse(lblCamara.Text, out int Camara)
-                && Ram > 0
-                && Rom > 0
-                && Camara > 0)
+            switch (lbxProducto.SelectedIndex)
             {
-                return true;
+                case 0:
+                    lbxTamanio.Enabled = true;
+                    lbxProcesador.Enabled = true;
+                    cbxCamara.Enabled = true;
+                    cbxRam.Enabled = true;
+                    cbxRom.Enabled = true;
+                    break;
+                case 1:
+                    lbxTamanio.Enabled = false;
+                    lbxProcesador.Enabled = true;
+                    cbxCamara.Enabled = true;
+                    cbxRam.Enabled = true;
+                    cbxRom.Enabled = true;
+                    break;
+                case 2:
+                    lbxTamanio.Enabled = false;
+                    lbxProcesador.Enabled = true;
+                    cbxCamara.Enabled = false;
+                    cbxRam.Enabled = true;
+                    cbxRom.Enabled = true;
+                    break;
             }
-
-            throw new ValorInvalidoException();
         }
     }
 }

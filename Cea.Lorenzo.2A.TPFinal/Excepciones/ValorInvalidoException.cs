@@ -8,8 +8,6 @@ namespace Excepciones
 {
     public class ValorInvalidoException : Exception
     {
-        private string mensajeBase;
-
         public ValorInvalidoException() : this("El valor ingresado es inválido o está vacío!")
         {
         }
@@ -18,14 +16,12 @@ namespace Excepciones
         {
         }
 
-        public ValorInvalidoException(string mensaje) : base(mensaje)
+        public ValorInvalidoException(string parametro) : base($"El valor ingresado {parametro} es inválido o está vacío!")
         {
-            mensajeBase = mensaje;
         }
 
-        public ValorInvalidoException(string mensaje, Exception e) : base(mensaje, e)
+        public ValorInvalidoException(string parametro, Exception e) : base($"El valor ingresado {parametro} es inválido o está vacío!", e)
         {
-            mensajeBase = mensaje;
         }
     }
 }

@@ -16,61 +16,72 @@ namespace Entidades
 		protected string _modelo;
 
 		#region Propiedades
-		public ETamanio Tamanio
+		public string Tamanio
 		{
 			get
 			{
-				return _tamanio;
+				return _tamanio.ToString();
 			}
 			protected set
             {
-				_tamanio = value;
+				if (!Enum.TryParse(value, out ETamanio tamanio))
+                {
+					throw new ValorInvalidoException("Tamaño");
+                }
+
+				_tamanio = tamanio;
             }
 		}
 
-		public EMarca Procesador
+		public string Procesador
 		{
 			get
 			{
-				return _procesador;
+				return _procesador.ToString();
 			}
 			protected set
 			{
-				_procesador = value;
+				if (!Enum.TryParse(value, out EMarca procesador))
+				{
+					throw new ValorInvalidoException("Procesador");
+				}
+				_procesador = procesador;
 			}
 		}
 
-		public int Ram
+		public string Ram
 		{
 			get
 			{
-				return _ram;
+				return _ram.ToString();
 			}
 			protected set
             {
-				if (value <= 0 || value > 16)
+				if (!int.TryParse(value, out int ram)
+					|| (ram <= 0 || ram > 16))
                 {
-					throw new ValorInvalidoException();
+					throw new ValorInvalidoException("RAM");
                 }
 				
-				_ram = value;
+				_ram = ram;
             }
 		}
 
-		public int Rom
+		public string Rom
 		{
 			get
 			{
-				return _rom;
+				return _rom.ToString();
 			}
 			protected set
 			{
-				if (value <= 0 || value > 256)
+				if (!int.TryParse(value, out int rom)
+					|| (rom <= 0 || rom > 256))
 				{
-					throw new ValorInvalidoException();
+					throw new ValorInvalidoException("ROM");
 				}
 
-				_rom = value;
+				_rom = rom;
 			}
 		}
 
@@ -84,7 +95,7 @@ namespace Entidades
 			{
 				if (string.IsNullOrWhiteSpace(value))
 				{
-					throw new ValorInvalidoException();
+					throw new ValorInvalidoException("Modelo");
 				}
 
 				_modelo = value;
@@ -92,7 +103,7 @@ namespace Entidades
 		}
         #endregion
 
-        public Producto(string modelo, int ram, int rom, ETamanio tamanio, EMarca procesador)
+        public Producto(string modelo, string ram, string rom, string tamanio, string procesador)
 		{
 			Modelo = modelo;
 			Ram = ram;
@@ -103,11 +114,11 @@ namespace Entidades
 
 		public static bool operator ==(Producto p1, Producto p2)
         {
-			return p1.Tamanio == p2.Tamanio
-				&& p1.Procesador == p2.Procesador
-				&& p1.Ram == p2.Ram
-				&& p1.Rom == p2.Rom
-				&& p1.Modelo == p2.Modelo;
+			return p1._tamanio == p2._tamanio
+				&& p1._procesador == p2._procesador
+				&& p1._ram == p2._ram
+				&& p1._rom == p2._rom
+				&& p1._modelo == p2._modelo;
         }
 
 		public static bool operator !=(Producto p1, Producto p2)
@@ -119,24 +130,10 @@ namespace Entidades
 		{
 			StringBuilder sb = new StringBuilder();
 
-			sb.Append($"{Modelo}, {Tamanio}, {Procesador}, {Ram}GB, {Rom}GB");
+			sb.Append($"{this.GetType().Name}, {Modelo}, {Tamanio}, {Procesador}, {Ram}GB, {Rom}GB");
 			//sb.AppendLine("---------------------");
 
 			return sb.ToString();
 		}
-
-		//     public override string ToString()
-		//     {
-		//StringBuilder sb = new StringBuilder();
-
-		//sb.AppendLine($"MODELO: {Modelo}");
-		//sb.AppendLine($"TAMAÑO: {Tamanio}");
-		//sb.AppendLine($"PROCESADOR: {Procesador}");
-		//sb.AppendLine($"RAM: {Ram}");
-		//sb.AppendLine($"ROM: {Rom}");
-		////sb.AppendLine("---------------------");
-
-		//return sb.ToString();
-		//     }
 	}
 }

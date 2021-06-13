@@ -8,12 +8,12 @@ namespace Entidades
 {
 	public class SmartWatch : Producto
 	{
-		public SmartWatch(string modelo, int ram, int rom, EMarca procesador)
-			: base(modelo, ram, rom, ETamanio.Chico, procesador)
+		public SmartWatch(string modelo, string ram, string rom, string procesador)
+			: base(modelo, ram, rom, ETamanio.Chico.ToString(), procesador)
 		{ }
 
-		public SmartWatch(string modelo, int ram, int rom)
-			: this(modelo, ram, rom, EMarca.Generico)
+		public SmartWatch(string modelo, string ram, string rom)
+			: this(modelo, ram, rom, EMarca.Generico.ToString())
 		{ }
 
 		public override bool Equals(object obj)

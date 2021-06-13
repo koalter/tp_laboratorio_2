@@ -30,7 +30,7 @@ namespace Entidades
             foreach (var elemento in _lista)
             {
                 sb.AppendLine();
-                sb.AppendLine($"{elemento.GetType().Name}, {elemento}");
+                sb.AppendLine(elemento.ToString());
                 sb.AppendLine("---------------------");
             }
 
@@ -39,7 +39,7 @@ namespace Entidades
 
         private void Agregar(T obj)
         {
-            if (obj is null) throw new NullReferenceException();
+            if (obj is null) throw new NullReferenceException("El objeto ingresado es nulo!");
 
             if (this._lista.Count >= this._capacidad) throw new FabricaLlenaException();
 
@@ -54,6 +54,8 @@ namespace Entidades
 
         private void Remover(T obj)
         {
+            if (obj is null) throw new NullReferenceException();
+
             int indice = _lista.IndexOf(obj);
 
             if (indice < 0)

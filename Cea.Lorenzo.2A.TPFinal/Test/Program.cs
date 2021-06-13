@@ -14,17 +14,17 @@ namespace Test
         {
             Fabrica<Producto> fabrica = new Fabrica<Producto>(3);
 
-            Celular c1 = new Celular("Redmi 9", 2, 64, 13, ETamanio.Mediano, EMarca.Helio);
-            Producto c2 = new Celular("A01 Core", 1, 16, 5, ETamanio.Chico, EMarca.Exynos);
-            Tablet t1 = new Tablet("A08", 2, 32, 8, EMarca.Exynos);
-            Tablet t2 = new Tablet("TM-1640A7", 2, 32, 5);
-            SmartWatch s1 = new SmartWatch("GT-1054", 1, 8, EMarca.Snapdragon);
-            SmartWatch s2 = new SmartWatch("FM-6654", 1, 8);
+            Celular c1 = new Celular("Redmi 9", "2", "64", "13", "Mediano", "Helio");
+            Producto c2 = new Celular("A01 Core", "1", "16", "5", "Chico", "Exynos");
+            Tablet t1 = new Tablet("A08", "2", "32", "8", EMarca.Exynos.ToString());
+            Tablet t2 = new Tablet("TM-1640A7", "2", "32", "5");
+            SmartWatch s1 = new SmartWatch("GT-1054", "1", "8", "Snapdragon");
+            SmartWatch s2 = new SmartWatch("FM-6654", "1", "8");
 
             Producto productoInvalido;
             try // ValorInvalidoException
             {
-                productoInvalido = new Celular("", 0, 0, 0, ETamanio.Mediano, EMarca.Exynos);
+                productoInvalido = new Celular("", "0", "0", "0", "Mediano", "Exynos");
             }
             catch (ValorInvalidoException e)
             {

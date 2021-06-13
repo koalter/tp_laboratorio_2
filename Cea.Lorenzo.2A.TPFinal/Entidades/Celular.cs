@@ -11,37 +11,38 @@ namespace Entidades
 	{
 		private int _megapixeles;
 
-		public int Megapixeles
+		public string Megapixeles
 		{
 			get
 			{
-				return _megapixeles;
+				return _megapixeles.ToString();
 			}
 			protected set
             {
-				if (value <= 0 || value > 64)
+				if (!int.TryParse(value, out int megapixeles)
+					|| (megapixeles <= 0 || megapixeles > 64))
                 {
-					throw new ValorInvalidoException();
+					throw new ValorInvalidoException("Cámara");
 				}
 
-				_megapixeles = value;
+				_megapixeles = megapixeles;
             }
 		}
 
-		public Celular(string modelo, int ram, int rom, int megapixeles, ETamanio tamanio, EMarca procesador)
+		public Celular(string modelo, string ram, string rom, string megapixeles, string tamanio, string procesador)
 			: base(modelo, ram, rom, tamanio, procesador)
 		{
 			Megapixeles = megapixeles;
 		}
 
-		public Celular(string modelo, int ram, int rom, int megapixeles, ETamanio tamanio)
-			: this(modelo, ram, rom, megapixeles, tamanio, EMarca.Generico)
+		public Celular(string modelo, string ram, string rom, string megapixeles, string tamanio)
+			: this(modelo, ram, rom, megapixeles, tamanio, EMarca.Generico.ToString())
 		{ }
 
 		public static bool operator ==(Celular c1, Celular c2)
 		{
 			return (Producto)c1 == c2
-				&& c1.Megapixeles == c2.Megapixeles;
+				&& c1._megapixeles == c2._megapixeles;
 		}
 
 		public static bool operator !=(Celular c1, Celular c2)
@@ -63,14 +64,5 @@ namespace Entidades
 
 			return sb.ToString();
 		}
-
-		//     public override string ToString()
-		//     {
-		//StringBuilder sb = new StringBuilder();
-		//sb.Append(base.ToString());
-		//sb.AppendLine($"CAMARA: {Megapixeles}mpx");
-
-		//return sb.ToString();
-		//     }
 	}
 }
