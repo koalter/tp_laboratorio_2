@@ -8,6 +8,8 @@ namespace Entidades
 {
 	public class SmartWatch : Producto
 	{
+		public SmartWatch() : base() { }
+
 		public SmartWatch(string modelo, string ram, string rom, string procesador)
 			: base(modelo, ram, rom, ETamanio.Chico.ToString(), procesador)
 		{ }

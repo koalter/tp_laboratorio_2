@@ -103,6 +103,8 @@ namespace Entidades
 		}
         #endregion
 
+		public Producto() { }
+
         public Producto(string modelo, string ram, string rom, string tamanio, string procesador)
 		{
 			Modelo = modelo;

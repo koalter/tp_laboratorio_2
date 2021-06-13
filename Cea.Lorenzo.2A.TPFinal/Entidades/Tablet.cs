@@ -29,6 +29,7 @@ namespace Entidades
 			}
 		}
 
+		public Tablet() : base() { }
 		public Tablet(string modelo, string ram, string rom, string megapixeles, string procesador)
 			: base(modelo, ram, rom, ETamanio.Grande.ToString(), procesador)
 		{

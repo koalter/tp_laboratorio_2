@@ -29,6 +29,8 @@ namespace Entidades
             }
 		}
 
+		public Celular() : base() { }
+
 		public Celular(string modelo, string ram, string rom, string megapixeles, string tamanio, string procesador)
 			: base(modelo, ram, rom, tamanio, procesador)
 		{

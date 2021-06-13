@@ -61,6 +61,7 @@ namespace Test
                 Console.WriteLine(e.Message);
             }
 
+            Console.WriteLine();
             Console.WriteLine(fabrica.ToString());
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();
@@ -79,6 +80,7 @@ namespace Test
 
             fabrica += c2;
 
+            Console.WriteLine();
             Console.WriteLine(fabrica.ToString());
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();
@@ -94,6 +96,7 @@ namespace Test
                 Console.WriteLine(e.Message);
             }
 
+            Console.WriteLine();
             Console.WriteLine(fabrica.ToString());
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();

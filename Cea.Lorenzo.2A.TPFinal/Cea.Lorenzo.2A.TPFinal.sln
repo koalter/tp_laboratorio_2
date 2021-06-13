@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formulario", "Formulario\Formulario.csproj", "{5F4020BF-D286-463D-A367-03F76BF99A93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivos", "Archivos\Archivos.csproj", "{06FD7BDB-56BC-4FD4-A65B-9BA1EB16C3C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5F4020BF-D286-463D-A367-03F76BF99A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F4020BF-D286-463D-A367-03F76BF99A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F4020BF-D286-463D-A367-03F76BF99A93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06FD7BDB-56BC-4FD4-A65B-9BA1EB16C3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FD7BDB-56BC-4FD4-A65B-9BA1EB16C3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FD7BDB-56BC-4FD4-A65B-9BA1EB16C3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FD7BDB-56BC-4FD4-A65B-9BA1EB16C3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

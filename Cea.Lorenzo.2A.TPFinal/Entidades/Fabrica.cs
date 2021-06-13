@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Archivos;
 
 namespace Entidades
 {
 	public class Fabrica<T> where T : class
 	{
-		private int _capacidad;
 		private List<T> _lista;
 
-		private Fabrica()
+		public Fabrica()
 		{
 			_lista = new List<T>();
 		}
@@ -20,7 +20,6 @@ namespace Entidades
 		public Fabrica(int capacidad)
 			: this()
         {
-			_capacidad = capacidad;
         }
 
         public override string ToString()
@@ -29,9 +28,9 @@ namespace Entidades
 
             foreach (var elemento in _lista)
             {
-                sb.AppendLine();
+                //sb.AppendLine();
                 sb.AppendLine(elemento.ToString());
-                sb.AppendLine("---------------------");
+                //sb.AppendLine("---------------------");
             }
 
             return sb.ToString();
@@ -39,9 +38,7 @@ namespace Entidades
 
         private void Agregar(T obj)
         {
-            if (obj is null) throw new NullReferenceException("El objeto ingresado es nulo!");
-
-            if (this._lista.Count >= this._capacidad) throw new FabricaLlenaException();
+            if (obj is null) throw new NullReferenceException("No hay objeto para agregar!");
 
             foreach (var elemento in this._lista)
             {
@@ -64,6 +61,40 @@ namespace Entidades
             }
 
             this._lista.RemoveAt(indice);
+        }
+
+        public bool GuardarComoTexto(string archivo)
+        {
+            Texto texto = new Texto();
+            return texto.Guardar(archivo, this.ToString());
+        }
+
+        public bool GuardarComoXml(string archivo)
+        {
+            Xml<Fabrica<T>> xml = new Xml<Fabrica<T>>();
+            return xml.Guardar(archivo, this);
+        }
+
+        public string LeerArchivoTexto(string archivo)
+        {
+            Texto texto = new Texto();
+            if (texto.Leer(archivo, out string datos))
+            {
+                return datos;
+            }
+
+            return string.Empty;
+        }
+
+        public Fabrica<T> LeerArchivoXml(string archivo)
+        {
+            Xml<Fabrica<T>> xml = new Xml<Fabrica<T>>();
+            if (xml.Leer(archivo, out Fabrica<T> datos))
+            {
+                return datos;
+            }
+
+            return null;
         }
 
         public static Fabrica<T> operator +(Fabrica<T> fabrica, T obj)

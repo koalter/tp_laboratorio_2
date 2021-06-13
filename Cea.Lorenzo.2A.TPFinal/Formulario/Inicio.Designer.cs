@@ -37,7 +37,6 @@ namespace Formulario
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblProducto = new System.Windows.Forms.Label();
             this.lbxProducto = new System.Windows.Forms.ListBox();
-            this.lbxProcesador = new System.Windows.Forms.ListBox();
             this.lblProcesador = new System.Windows.Forms.Label();
             this.lblRam = new System.Windows.Forms.Label();
             this.lblRom = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@ namespace Formulario
             this.cbxCamara = new System.Windows.Forms.ComboBox();
             this.lblTamanio = new System.Windows.Forms.Label();
             this.lbxTamanio = new System.Windows.Forms.ListBox();
+            this.cbxMarca = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lbxFabrica
@@ -55,12 +55,12 @@ namespace Formulario
             this.lbxFabrica.ItemHeight = 16;
             this.lbxFabrica.Location = new System.Drawing.Point(405, 26);
             this.lbxFabrica.Name = "lbxFabrica";
-            this.lbxFabrica.Size = new System.Drawing.Size(383, 244);
+            this.lbxFabrica.Size = new System.Drawing.Size(414, 212);
             this.lbxFabrica.TabIndex = 0;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(19, 236);
+            this.btnAgregar.Location = new System.Drawing.Point(19, 203);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(100, 30);
             this.btnAgregar.TabIndex = 1;
@@ -70,7 +70,7 @@ namespace Formulario
             // 
             // btnRemover
             // 
-            this.btnRemover.Location = new System.Drawing.Point(148, 236);
+            this.btnRemover.Location = new System.Drawing.Point(148, 203);
             this.btnRemover.Name = "btnRemover";
             this.btnRemover.Size = new System.Drawing.Size(100, 30);
             this.btnRemover.TabIndex = 2;
@@ -80,7 +80,7 @@ namespace Formulario
             // 
             // btnFabricar
             // 
-            this.btnFabricar.Location = new System.Drawing.Point(277, 236);
+            this.btnFabricar.Location = new System.Drawing.Point(277, 203);
             this.btnFabricar.Name = "btnFabricar";
             this.btnFabricar.Size = new System.Drawing.Size(100, 30);
             this.btnFabricar.TabIndex = 3;
@@ -127,20 +127,6 @@ namespace Formulario
             this.lbxProducto.TabIndex = 7;
             this.lbxProducto.Click += new System.EventHandler(this.lbxProducto_Click);
             // 
-            // lbxProcesador
-            // 
-            this.lbxProcesador.Enabled = false;
-            this.lbxProcesador.FormattingEnabled = true;
-            this.lbxProcesador.ItemHeight = 16;
-            this.lbxProcesador.Items.AddRange(new object[] {
-            "Snapdragon",
-            "Exynos",
-            "Helio"});
-            this.lbxProcesador.Location = new System.Drawing.Point(103, 142);
-            this.lbxProcesador.Name = "lbxProcesador";
-            this.lbxProcesador.Size = new System.Drawing.Size(104, 52);
-            this.lbxProcesador.TabIndex = 9;
-            // 
             // lblProcesador
             // 
             this.lblProcesador.AutoSize = true;
@@ -153,7 +139,7 @@ namespace Formulario
             // lblRam
             // 
             this.lblRam.AutoSize = true;
-            this.lblRam.Location = new System.Drawing.Point(233, 75);
+            this.lblRam.Location = new System.Drawing.Point(233, 61);
             this.lblRam.Name = "lblRam";
             this.lblRam.Size = new System.Drawing.Size(38, 17);
             this.lblRam.TabIndex = 10;
@@ -162,7 +148,7 @@ namespace Formulario
             // lblRom
             // 
             this.lblRom.AutoSize = true;
-            this.lblRom.Location = new System.Drawing.Point(231, 116);
+            this.lblRom.Location = new System.Drawing.Point(231, 102);
             this.lblRom.Name = "lblRom";
             this.lblRom.Size = new System.Drawing.Size(40, 17);
             this.lblRom.TabIndex = 12;
@@ -171,7 +157,7 @@ namespace Formulario
             // lblCamara
             // 
             this.lblCamara.AutoSize = true;
-            this.lblCamara.Location = new System.Drawing.Point(214, 156);
+            this.lblCamara.Location = new System.Drawing.Point(214, 142);
             this.lblCamara.Name = "lblCamara";
             this.lblCamara.Size = new System.Drawing.Size(57, 17);
             this.lblCamara.TabIndex = 14;
@@ -186,7 +172,7 @@ namespace Formulario
             "2",
             "3",
             "4"});
-            this.cbxRam.Location = new System.Drawing.Point(277, 72);
+            this.cbxRam.Location = new System.Drawing.Point(277, 58);
             this.cbxRam.Name = "cbxRam";
             this.cbxRam.Size = new System.Drawing.Size(49, 24);
             this.cbxRam.TabIndex = 15;
@@ -200,7 +186,7 @@ namespace Formulario
             "32",
             "64",
             "128"});
-            this.cbxRom.Location = new System.Drawing.Point(277, 113);
+            this.cbxRom.Location = new System.Drawing.Point(277, 99);
             this.cbxRom.Name = "cbxRom";
             this.cbxRom.Size = new System.Drawing.Size(49, 24);
             this.cbxRom.TabIndex = 16;
@@ -214,7 +200,7 @@ namespace Formulario
             "13",
             "48",
             "64"});
-            this.cbxCamara.Location = new System.Drawing.Point(277, 153);
+            this.cbxCamara.Location = new System.Drawing.Point(277, 139);
             this.cbxCamara.Name = "cbxCamara";
             this.cbxCamara.Size = new System.Drawing.Size(49, 24);
             this.cbxCamara.TabIndex = 17;
@@ -242,11 +228,25 @@ namespace Formulario
             this.lbxTamanio.Size = new System.Drawing.Size(104, 52);
             this.lbxTamanio.TabIndex = 19;
             // 
+            // cbxMarca
+            // 
+            this.cbxMarca.Enabled = false;
+            this.cbxMarca.FormattingEnabled = true;
+            this.cbxMarca.Items.AddRange(new object[] {
+            "Snapdragon",
+            "Exynos",
+            "Helio"});
+            this.cbxMarca.Location = new System.Drawing.Point(103, 142);
+            this.cbxMarca.Name = "cbxMarca";
+            this.cbxMarca.Size = new System.Drawing.Size(104, 24);
+            this.cbxMarca.TabIndex = 20;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 285);
+            this.ClientSize = new System.Drawing.Size(831, 259);
+            this.Controls.Add(this.cbxMarca);
             this.Controls.Add(this.lbxTamanio);
             this.Controls.Add(this.lblTamanio);
             this.Controls.Add(this.cbxCamara);
@@ -255,7 +255,6 @@ namespace Formulario
             this.Controls.Add(this.lblCamara);
             this.Controls.Add(this.lblRom);
             this.Controls.Add(this.lblRam);
-            this.Controls.Add(this.lbxProcesador);
             this.Controls.Add(this.lblProcesador);
             this.Controls.Add(this.lbxProducto);
             this.Controls.Add(this.lblProducto);
@@ -282,7 +281,6 @@ namespace Formulario
         private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label lblProducto;
         private System.Windows.Forms.ListBox lbxProducto;
-        private System.Windows.Forms.ListBox lbxProcesador;
         private System.Windows.Forms.Label lblProcesador;
         private System.Windows.Forms.Label lblRam;
         private System.Windows.Forms.Label lblRom;
@@ -292,6 +290,7 @@ namespace Formulario
         private System.Windows.Forms.ComboBox cbxCamara;
         private System.Windows.Forms.Label lblTamanio;
         private System.Windows.Forms.ListBox lbxTamanio;
+        private System.Windows.Forms.ComboBox cbxMarca;
     }
 }
 

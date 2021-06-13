@@ -15,6 +15,8 @@ namespace Formulario
     public partial class Inicio : Form
     {
         Fabrica<Producto> fabrica;
+        const string archivoTexto = "Productos.txt";
+        const string archivoXml = "Productos.xml";
 
         public Inicio()
         {
@@ -28,7 +30,8 @@ namespace Formulario
 
             try
             {
-                producto = GenerarProducto();
+                producto = GenerarProducto(txtModelo.Text, cbxRam.Text,
+                        cbxRom.Text, cbxCamara.Text, lbxTamanio.Text, cbxMarca.Text);
 
                 fabrica += producto;
                 lbxFabrica.Items.Add(producto);
@@ -38,19 +41,27 @@ namespace Formulario
                 MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        private Producto GenerarProducto()
+        private Producto GenerarProducto(string modelo, string ram, string rom, string camara,
+            string tamanio, string procesador)
         {
+            if (!procesador.ToLower().Equals("snapdragon") && 
+                !procesador.ToLower().Equals("exynos") &&
+                !procesador.ToLower().Equals("helio"))
+            {
+                procesador = "Generico";
+            }
+
             switch (lbxProducto.Text.ToLower())
             {
                 case "celular":
-                    return new Celular(txtModelo.Text, cbxRam.Text,
-                        cbxRom.Text, cbxCamara.Text, lbxTamanio.Text, lbxProcesador.Text);
+                    return new Celular(modelo, ram,
+                        rom, camara, tamanio, procesador);
                 case "tablet":
-                    return new Tablet(txtModelo.Text, cbxRam.Text,
-                        cbxRom.Text, cbxCamara.Text, lbxProcesador.Text);
+                    return new Tablet(modelo, ram,
+                        rom, camara, procesador);
                 case "smartwatch":
-                    return new SmartWatch(txtModelo.Text, cbxRam.Text,
-                        cbxRom.Text, lbxProcesador.Text);
+                    return new SmartWatch(modelo, ram,
+                        rom, procesador);
                 default:
                     return null;
             }
@@ -76,7 +87,15 @@ namespace Formulario
 
         private void btnFabricar_Click(object sender, EventArgs e)
         {
-
+            if (fabrica.GuardarComoTexto(archivoTexto) && fabrica.GuardarComoXml(archivoXml))
+            {
+                lbxFabrica.Items.Clear();
+                MessageBox.Show($"Hecho! Los productos están en {archivoTexto} y {archivoXml}", "Productos fabricados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Hubo un error al guardar archivos.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void lbxProducto_Click(object sender, EventArgs e)
@@ -85,21 +104,21 @@ namespace Formulario
             {
                 case 0:
                     lbxTamanio.Enabled = true;
-                    lbxProcesador.Enabled = true;
+                    cbxMarca.Enabled = true;
                     cbxCamara.Enabled = true;
                     cbxRam.Enabled = true;
                     cbxRom.Enabled = true;
                     break;
                 case 1:
                     lbxTamanio.Enabled = false;
-                    lbxProcesador.Enabled = true;
+                    cbxMarca.Enabled = true;
                     cbxCamara.Enabled = true;
                     cbxRam.Enabled = true;
                     cbxRom.Enabled = true;
                     break;
                 case 2:
                     lbxTamanio.Enabled = false;
-                    lbxProcesador.Enabled = true;
+                    cbxMarca.Enabled = true;
                     cbxCamara.Enabled = false;
                     cbxRam.Enabled = true;
                     cbxRom.Enabled = true;
