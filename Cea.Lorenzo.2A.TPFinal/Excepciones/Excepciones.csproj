@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgregarObjetoException.cs" />
-    <Compile Include="FabricaLlenaException.cs" />
     <Compile Include="RemoverObjetoException.cs" />
     <Compile Include="ValorInvalidoException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

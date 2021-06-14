@@ -17,11 +17,6 @@ namespace Entidades
 			_lista = new List<T>();
 		}
 
-		public Fabrica(int capacidad)
-			: this()
-        {
-        }
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

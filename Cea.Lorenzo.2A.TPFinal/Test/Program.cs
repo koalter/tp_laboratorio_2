@@ -12,7 +12,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>(3);
+            Fabrica<Producto> fabrica = new Fabrica<Producto>();
 
             Celular c1 = new Celular("Redmi 9", "2", "64", "13", "Mediano", "Helio");
             Producto c2 = new Celular("A01 Core", "1", "16", "5", "Chico", "Exynos");
@@ -36,14 +36,6 @@ namespace Test
             fabrica += t1;
             fabrica += s1;
             // No deberia dejar agregar estos objetos
-            try
-            {
-                fabrica += c2;
-            }
-            catch (FabricaLlenaException e)
-            {
-                Console.WriteLine(e.Message);
-            }
             try
             {
                 fabrica += productoInvalido;

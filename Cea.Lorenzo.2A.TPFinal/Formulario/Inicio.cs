@@ -21,7 +21,7 @@ namespace Formulario
         public Inicio()
         {
             InitializeComponent();
-            fabrica = new Fabrica<Producto>(10);
+            fabrica = new Fabrica<Producto>();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
