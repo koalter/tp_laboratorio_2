@@ -7,6 +7,10 @@ using System.IO;
 
 namespace Archivos
 {
+    /// <summary>
+    /// Es la clase que va a manejar el guardado y lectura de archivos de texto. 
+    /// En el sentido del TP, va a permitir guardar la información de la lista de Productos en un archivo de texto.
+    /// </summary>
     public class Texto : IArchivos<string>
     {
         /// <summary>

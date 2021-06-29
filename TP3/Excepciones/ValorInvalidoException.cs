@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Excepciones
 {
+    /// <summary>
+    /// Excepcion hecha para el caso en que se vaya a ingresar un dato inválido
+    /// (como por ejemplo un caracter para un campo numérico) o un dato vacío
+    /// </summary>
     public class ValorInvalidoException : Exception
     {
         public ValorInvalidoException() : this("El valor ingresado es inválido o está vacío!")
