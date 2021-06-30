@@ -86,20 +86,28 @@ namespace Formulario
 
         private void btnFabricar_Click(object sender, EventArgs e)
         {
-            string fecha = DateTime.Now.ToFileTime().ToString();
-            string ruta = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\{fecha}";
-
-            Directory.CreateDirectory(ruta);
-            if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) && fabrica.GuardarComoXml(ruta + "\\" + fecha))
+            if (lbxFabrica.Items.Count != 1)
             {
-                lbxFabrica.Items.Clear();
-                fabrica.Limpiar();
-                MessageBox.Show($"Hecho! Los productos están en {ruta}", "Productos fabricados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string fecha = DateTime.Now.ToFileTime().ToString();
+                string ruta = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\{fecha}";
+
+                Directory.CreateDirectory(ruta);
+                if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) && fabrica.GuardarComoXml(ruta + "\\" + fecha))
+                {
+                    lbxFabrica.Items.Clear();
+                    fabrica.Limpiar();
+                    MessageBox.Show($"Hecho! Los productos están en {ruta}", "Productos fabricados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error al guardar archivos.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("Hubo un error al guardar archivos.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor ingresá aunque sea un producto más. La fabricación y despacho de equipos móviles es muy costosa como para que pidas un solo producto!", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
         }
 
         private void lbxProducto_Click(object sender, EventArgs e)

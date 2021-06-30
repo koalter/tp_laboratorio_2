@@ -15,18 +15,18 @@ namespace Entidades
     /// <typeparam name="T">Tipo de objeto que va a contener la Fabrica</typeparam>
 	public class Fabrica<T> where T : class
 	{
-		private List<T> _lista;
+		private List<T> lista;
 
 		public Fabrica()
 		{
-			_lista = new List<T>();
+			lista = new List<T>();
 		}
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var elemento in _lista)
+            foreach (var elemento in lista)
             {
                 //sb.AppendLine();
                 sb.AppendLine(elemento.ToString());
@@ -45,13 +45,13 @@ namespace Entidades
         {
             if (obj is null) throw new NullReferenceException("No hay objeto para agregar!");
 
-            foreach (var elemento in this._lista)
+            foreach (var elemento in this.lista)
             {
                 if (elemento.Equals(obj))
                     throw new AgregarObjetoException();
             }
 
-            this._lista.Add(obj);
+            this.lista.Add(obj);
         }
 
         /// <summary>
@@ -63,14 +63,14 @@ namespace Entidades
         {
             if (obj is null) throw new NullReferenceException();
 
-            int indice = _lista.IndexOf(obj);
+            int indice = lista.IndexOf(obj);
 
             if (indice < 0)
             {
                 throw new RemoverObjetoException();
             }
 
-            this._lista.RemoveAt(indice);
+            this.lista.RemoveAt(indice);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Entidades
         /// </summary>
         public void Limpiar()
         {
-            this._lista.Clear();
+            this.lista.Clear();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Entidades
         public bool GuardarComoTexto(string archivo)
         {
             Texto texto = new Texto();
-            return texto.Guardar(archivo + ".txt", this.ToString());
+            return texto.Guardar(archivo, this.ToString());
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Entidades
         public bool GuardarComoXml(string archivo)
         {
             Xml<List<T>> xml = new Xml<List<T>>();
-            return xml.Guardar(archivo + ".xml", _lista);
+            return xml.Guardar(archivo, lista);
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace Archivos
         {
             if (archivo != null && datos != null)
             {
-                XmlTextWriter file = new XmlTextWriter(archivo, Encoding.UTF8);
+                XmlTextWriter file = new XmlTextWriter(archivo + ".xml", Encoding.UTF8);
                 XmlSerializer xml = new XmlSerializer(typeof(T));
                 xml.Serialize(file, datos);
                 file.Close();

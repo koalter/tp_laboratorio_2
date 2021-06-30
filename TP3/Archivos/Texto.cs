@@ -23,7 +23,7 @@ namespace Archivos
         {
             if (archivo != null && datos != null)
             {
-                StreamWriter sw = new StreamWriter(archivo);
+                StreamWriter sw = new StreamWriter(archivo + ".txt");
                 sw.Write(datos);
                 sw.Close();
             }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Archivos;
 using Entidades;
 using Excepciones;
 
@@ -12,6 +14,8 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            string archivo = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\test";
+
             Fabrica<Producto> fabrica = new Fabrica<Producto>();
 
             Celular c1 = new Celular("Redmi 9", "2", "64", "13", "Mediano", "Helio");
@@ -35,6 +39,7 @@ namespace Test
             fabrica += c1;
             fabrica += t1;
             fabrica += s1;
+
             // No deberia dejar agregar estos objetos
             try
             {
@@ -90,6 +95,34 @@ namespace Test
 
             Console.WriteLine();
             Console.WriteLine(fabrica.ToString());
+            Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("PROBANDO GuardarComoTexto");
+            Directory.CreateDirectory(archivo);
+            fabrica.GuardarComoTexto(archivo + "\\test");
+            
+            Console.WriteLine();
+            Console.WriteLine(fabrica.LeerArchivoTexto(archivo + "\\test.txt"));
+            Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
+            Console.ReadLine();
+
+            Console.WriteLine("PROBANDO GuardarComoXml");
+            Directory.CreateDirectory(archivo);
+            fabrica.GuardarComoXml(archivo + "\\test");
+
+            fabrica.Limpiar();
+
+            List<Producto> nuevaListaDeProductos = new List<Producto>(fabrica.LeerArchivoXml(archivo + "\\test.xml"));
+
+            foreach (Producto producto in nuevaListaDeProductos)
+            {
+                fabrica += producto;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine(fabrica);
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();
         }
