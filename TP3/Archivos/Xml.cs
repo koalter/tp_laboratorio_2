@@ -9,6 +9,11 @@ using System.IO;
 
 namespace Archivos
 {
+    /// <summary>
+    /// Es la clase que va a manejar el guardado y lectura de archivos XML. 
+    /// Se usa de manera genérica para que sus métodos sean compatibles con cualquier clase que se implemente.
+    /// </summary>
+    /// <typeparam name="T">Tipo de dato que va a guardar/leer</typeparam>
     public class Xml<T> : IArchivos<T>
     {
         /// <summary>
@@ -21,13 +26,13 @@ namespace Archivos
         {
             if (archivo != null && datos != null)
             {
-                XmlTextWriter file = new XmlTextWriter(archivo, Encoding.UTF8);
-                XmlSerializer xml = new XmlSerializer(typeof(T), "Entidades");
+                XmlTextWriter file = new XmlTextWriter(archivo + ".xml", Encoding.UTF8);
+                XmlSerializer xml = new XmlSerializer(typeof(T));
                 xml.Serialize(file, datos);
                 file.Close();
             }
 
-            return File.Exists(archivo);
+            return File.Exists(archivo + ".xml");
         }
 
         /// <summary>

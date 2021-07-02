@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Excepciones
 {
+    /// <summary>
+    /// Excepcion hecha para el caso en que se quiera agregar un objeto ya existente.
+    /// </summary>
     public class AgregarObjetoException : Exception
     {
         public AgregarObjetoException() : this("EL OBJETO YA EXISTE!")

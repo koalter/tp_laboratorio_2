@@ -174,7 +174,7 @@ namespace Formulario
             "4"});
             this.cbxRam.Location = new System.Drawing.Point(277, 58);
             this.cbxRam.Name = "cbxRam";
-            this.cbxRam.Size = new System.Drawing.Size(49, 24);
+            this.cbxRam.Size = new System.Drawing.Size(58, 24);
             this.cbxRam.TabIndex = 15;
             // 
             // cbxRom
@@ -188,7 +188,7 @@ namespace Formulario
             "128"});
             this.cbxRom.Location = new System.Drawing.Point(277, 99);
             this.cbxRom.Name = "cbxRom";
-            this.cbxRom.Size = new System.Drawing.Size(49, 24);
+            this.cbxRom.Size = new System.Drawing.Size(58, 24);
             this.cbxRom.TabIndex = 16;
             // 
             // cbxCamara
@@ -202,7 +202,7 @@ namespace Formulario
             "64"});
             this.cbxCamara.Location = new System.Drawing.Point(277, 139);
             this.cbxCamara.Name = "cbxCamara";
-            this.cbxCamara.Size = new System.Drawing.Size(49, 24);
+            this.cbxCamara.Size = new System.Drawing.Size(58, 24);
             this.cbxCamara.TabIndex = 17;
             // 
             // lblTamanio

@@ -17,7 +17,7 @@ namespace Entidades
 			{
 				return _megapixeles.ToString();
 			}
-			protected set
+			set
             {
 				if (!int.TryParse(value, out int megapixeles)
 					|| (megapixeles <= 0 || megapixeles > 64))

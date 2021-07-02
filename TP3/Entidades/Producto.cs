@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Excepciones;
 
 namespace Entidades
 {
+	[XmlInclude(typeof(Celular))]
+	[XmlInclude(typeof(Tablet))]
+	[XmlInclude(typeof(SmartWatch))]
 	public abstract class Producto
 	{
 		protected ETamanio _tamanio;
@@ -22,7 +26,7 @@ namespace Entidades
 			{
 				return _tamanio.ToString();
 			}
-			protected set
+			set
             {
 				if (!Enum.TryParse(value, out ETamanio tamanio))
                 {
@@ -39,7 +43,7 @@ namespace Entidades
 			{
 				return _procesador.ToString();
 			}
-			protected set
+			set
 			{
 				if (!Enum.TryParse(value, out EMarca procesador))
 				{
@@ -55,7 +59,7 @@ namespace Entidades
 			{
 				return _ram.ToString();
 			}
-			protected set
+			set
             {
 				if (!int.TryParse(value, out int ram)
 					|| (ram <= 0 || ram > 16))
@@ -73,7 +77,7 @@ namespace Entidades
 			{
 				return _rom.ToString();
 			}
-			protected set
+			set
 			{
 				if (!int.TryParse(value, out int rom)
 					|| (rom <= 0 || rom > 256))
@@ -91,7 +95,7 @@ namespace Entidades
 			{
 				return _modelo;
 			}
-			protected set
+			set
 			{
 				if (string.IsNullOrWhiteSpace(value))
 				{
