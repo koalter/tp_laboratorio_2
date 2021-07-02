@@ -28,7 +28,7 @@ namespace Archivos
                 sw.Close();
             }
 
-            return File.Exists(archivo);
+            return File.Exists(archivo + ".txt");
         }
 
         /// <summary>

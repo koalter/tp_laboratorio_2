@@ -32,7 +32,7 @@ namespace Archivos
                 file.Close();
             }
 
-            return File.Exists(archivo);
+            return File.Exists(archivo + ".xml");
         }
 
         /// <summary>
