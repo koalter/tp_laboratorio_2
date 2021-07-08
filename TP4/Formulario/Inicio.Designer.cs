@@ -47,15 +47,20 @@ namespace Formulario
             this.lblTamanio = new System.Windows.Forms.Label();
             this.lbxTamanio = new System.Windows.Forms.ListBox();
             this.cbxMarca = new System.Windows.Forms.ComboBox();
+            this.lbxEnCurso = new System.Windows.Forms.ListBox();
+            this.lbxHechos = new System.Windows.Forms.ListBox();
+            this.lblFabrica = new System.Windows.Forms.Label();
+            this.lblEnCurso = new System.Windows.Forms.Label();
+            this.lblHechos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbxFabrica
             // 
             this.lbxFabrica.FormattingEnabled = true;
             this.lbxFabrica.ItemHeight = 16;
-            this.lbxFabrica.Location = new System.Drawing.Point(405, 26);
+            this.lbxFabrica.Location = new System.Drawing.Point(405, 45);
             this.lbxFabrica.Name = "lbxFabrica";
-            this.lbxFabrica.Size = new System.Drawing.Size(414, 212);
+            this.lbxFabrica.Size = new System.Drawing.Size(414, 52);
             this.lbxFabrica.TabIndex = 0;
             // 
             // btnAgregar
@@ -241,11 +246,61 @@ namespace Formulario
             this.cbxMarca.Size = new System.Drawing.Size(104, 24);
             this.cbxMarca.TabIndex = 20;
             // 
+            // lbxEnCurso
+            // 
+            this.lbxEnCurso.FormattingEnabled = true;
+            this.lbxEnCurso.ItemHeight = 16;
+            this.lbxEnCurso.Location = new System.Drawing.Point(405, 123);
+            this.lbxEnCurso.Name = "lbxEnCurso";
+            this.lbxEnCurso.Size = new System.Drawing.Size(414, 52);
+            this.lbxEnCurso.TabIndex = 21;
+            // 
+            // lbxHechos
+            // 
+            this.lbxHechos.FormattingEnabled = true;
+            this.lbxHechos.ItemHeight = 16;
+            this.lbxHechos.Location = new System.Drawing.Point(405, 195);
+            this.lbxHechos.Name = "lbxHechos";
+            this.lbxHechos.Size = new System.Drawing.Size(414, 52);
+            this.lbxHechos.TabIndex = 22;
+            // 
+            // lblFabrica
+            // 
+            this.lblFabrica.AutoSize = true;
+            this.lblFabrica.Location = new System.Drawing.Point(402, 25);
+            this.lblFabrica.Name = "lblFabrica";
+            this.lblFabrica.Size = new System.Drawing.Size(73, 17);
+            this.lblFabrica.TabIndex = 23;
+            this.lblFabrica.Text = "En espera";
+            // 
+            // lblEnCurso
+            // 
+            this.lblEnCurso.AutoSize = true;
+            this.lblEnCurso.Location = new System.Drawing.Point(402, 103);
+            this.lblEnCurso.Name = "lblEnCurso";
+            this.lblEnCurso.Size = new System.Drawing.Size(79, 17);
+            this.lblEnCurso.TabIndex = 24;
+            this.lblEnCurso.Text = "Fabricando";
+            // 
+            // lblHechos
+            // 
+            this.lblHechos.AutoSize = true;
+            this.lblHechos.Location = new System.Drawing.Point(403, 178);
+            this.lblHechos.Name = "lblHechos";
+            this.lblHechos.Size = new System.Drawing.Size(72, 17);
+            this.lblHechos.TabIndex = 25;
+            this.lblHechos.Text = "Finalizado";
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 259);
+            this.Controls.Add(this.lblHechos);
+            this.Controls.Add(this.lblEnCurso);
+            this.Controls.Add(this.lblFabrica);
+            this.Controls.Add(this.lbxHechos);
+            this.Controls.Add(this.lbxEnCurso);
             this.Controls.Add(this.cbxMarca);
             this.Controls.Add(this.lbxTamanio);
             this.Controls.Add(this.lblTamanio);
@@ -266,6 +321,7 @@ namespace Formulario
             this.Controls.Add(this.lbxFabrica);
             this.Name = "Inicio";
             this.Text = "Lorenzo Nahuel Cea Ko, 2A";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Inicio_FormClosing);
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -292,6 +348,11 @@ namespace Formulario
         private System.Windows.Forms.Label lblTamanio;
         private System.Windows.Forms.ListBox lbxTamanio;
         private System.Windows.Forms.ComboBox cbxMarca;
+        private System.Windows.Forms.ListBox lbxEnCurso;
+        private System.Windows.Forms.ListBox lbxHechos;
+        private System.Windows.Forms.Label lblFabrica;
+        private System.Windows.Forms.Label lblEnCurso;
+        private System.Windows.Forms.Label lblHechos;
     }
 }
 

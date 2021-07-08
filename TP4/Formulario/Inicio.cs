@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,16 +19,20 @@ namespace Formulario
     {
         const string connectionString = "Server=localhost\\SQL2014;Database=Cea.Lorenzo.2A;Trusted_connection=True;";
         Fabrica fabrica;
+        List<Thread> hilos;
 
         public Inicio()
         {
             InitializeComponent();
             fabrica = new Fabrica();
+            fabrica.CambiarStatusEvent += CambiarEstado;
+            hilos = new List<Thread>();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Producto producto;
+            Thread thread;
 
             try
             {
@@ -35,7 +40,10 @@ namespace Formulario
                         cbxRom.Text, cbxCamara.Text, lbxTamanio.Text, cbxMarca.Text);
 
                 fabrica += producto;
-                lbxFabrica.Items.Add(producto);
+
+                thread = new Thread(fabrica.CambiarStatus);
+                hilos.Add(thread);
+                thread.Start(producto);
             }
             catch (Exception ex)
             {
@@ -149,6 +157,35 @@ namespace Formulario
                 MessageBox.Show("No se pudo conectar a la base. Asegúrese de que la cadena de conexión tenga sus parámetros correctamente e intente nuevamente.", "Cadena de conexión incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.Close();
             }
+        }
+
+        private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (Thread hilo in hilos)
+            {
+                if (hilo.IsAlive)
+                {
+                    try
+                    {
+                        hilo.Abort();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private void CambiarEstado(object producto)
+        {
+            lbxFabrica.Items.Add(producto);
+            Thread.Sleep(2000);
+            lbxFabrica.Items.Remove(producto);
+            lbxEnCurso.Items.Add(producto);
+            Thread.Sleep(2000);
+            lbxEnCurso.Items.Remove(producto);
+            lbxHechos.Items.Add(producto);
         }
     }
 }

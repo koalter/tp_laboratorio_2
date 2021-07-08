@@ -18,11 +18,17 @@ namespace Entidades
 	public class Fabrica : IArchivos<Fabrica>
 	{
 		private List<Producto> lista;
+        public event CambioStatus CambiarStatusEvent;
 
 		public Fabrica()
 		{
 			lista = new List<Producto>();
 		}
+
+        public void CambiarStatus(object producto)
+        {
+            CambiarStatusEvent(producto);
+        }
 
         public override string ToString()
         {

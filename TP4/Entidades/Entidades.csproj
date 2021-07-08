@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Celular.cs" />
+    <Compile Include="Delegados.cs" />
     <Compile Include="EMarca.cs" />
     <Compile Include="ETamanio.cs" />
     <Compile Include="Producto.cs" />
