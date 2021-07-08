@@ -16,7 +16,7 @@ namespace Test
         {
             string archivo = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\test";
 
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
 
             Celular c1 = new Celular("Redmi 9", "2", "64", "13", "Mediano", "Helio");
             Producto c2 = new Celular("A01 Core", "1", "16", "5", "Chico", "Exynos");

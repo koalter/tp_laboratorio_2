@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Archivos;
+using Entidades;
 using Excepciones;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,13 @@ namespace Formulario
 {
     public partial class Inicio : Form
     {
-        Fabrica<Producto> fabrica;
+        const string connectionString = "Server=localhost\\SQL2014;Database=Cea.Lorenzo.2A;Trusted_connection=True;";
+        Fabrica fabrica;
 
         public Inicio()
         {
             InitializeComponent();
-            fabrica = new Fabrica<Producto>();
+            fabrica = new Fabrica();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -92,7 +94,9 @@ namespace Formulario
                 string ruta = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\{fecha}";
 
                 Directory.CreateDirectory(ruta);
-                if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) && fabrica.GuardarComoXml(ruta + "\\" + fecha))
+                if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) 
+                    && fabrica.GuardarComoXml(ruta + "\\" + fecha) 
+                    && ((IArchivos<Fabrica>)fabrica).Guardar(connectionString, fabrica))
                 {
                     lbxFabrica.Items.Clear();
                     fabrica.Limpiar();
@@ -135,6 +139,15 @@ namespace Formulario
                     cbxRam.Enabled = true;
                     cbxRom.Enabled = true;
                     break;
+            }
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            if (Fabrica.TestConnectionString(connectionString) == false)
+            {
+                MessageBox.Show("No se pudo conectar a la base. Asegúrese de que la cadena de conexión tenga sus parámetros correctamente e intente nuevamente.", "Cadena de conexión incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
             }
         }
     }

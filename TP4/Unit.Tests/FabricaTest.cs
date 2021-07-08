@@ -17,7 +17,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeAgregarUnProducto()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
 
             fabrica += producto;
@@ -34,7 +34,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeRemoverUnProducto()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
 
             fabrica += producto;
@@ -49,7 +49,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeLimpiarLaLista()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto1 = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
             Producto producto2 = new Tablet("testModel2", "2", "32", "8", EMarca.Snapdragon.ToString());
 
@@ -68,7 +68,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeGenerarYLeerTexto()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
 
             fabrica += producto;
@@ -96,7 +96,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeGenerarYLeerXml()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
 
             fabrica += producto;
@@ -126,7 +126,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeImpedirAgregarDuplicados()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
             bool arrojaExcepcion = false;
 
@@ -150,7 +150,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeImpedirRemoverUnObjetoNoExistente()
         {
-            Fabrica<Producto> fabrica = new Fabrica<Producto>();
+            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
             bool arrojaExcepcion = false;
 

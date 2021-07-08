@@ -266,6 +266,7 @@ namespace Formulario
             this.Controls.Add(this.lbxFabrica);
             this.Name = "Inicio";
             this.Text = "Lorenzo Nahuel Cea Ko, 2A";
+            this.Load += new System.EventHandler(this.Inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

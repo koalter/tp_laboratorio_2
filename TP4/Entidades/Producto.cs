@@ -11,13 +11,14 @@ namespace Entidades
 	[XmlInclude(typeof(Celular))]
 	[XmlInclude(typeof(Tablet))]
 	[XmlInclude(typeof(SmartWatch))]
-	public abstract class Producto
+	public class Producto
 	{
 		protected ETamanio _tamanio;
 		protected EMarca _procesador;
 		protected int _ram;
 		protected int _rom;
 		protected string _modelo;
+		protected int _megapixeles;
 
 		#region Propiedades
 		public string Tamanio
@@ -105,17 +106,39 @@ namespace Entidades
 				_modelo = value;
 			}
 		}
-        #endregion
 
-		public Producto() { }
+		public string Megapixeles
+		{
+			get
+			{
+				return _megapixeles.ToString();
+			}
+			set
+			{
+				if (!int.TryParse(value, out int megapixeles)
+					|| (megapixeles < 0 || megapixeles > 64))
+				{
+					throw new ValorInvalidoException("Cámara");
+				}
 
-        public Producto(string modelo, string ram, string rom, string tamanio, string procesador)
+				_megapixeles = megapixeles;
+			}
+		}
+		#endregion
+
+		public Producto()
+        {
+
+        }
+
+        public Producto(string modelo, string ram, string rom, string tamanio, string procesador, string megapixeles)
 		{
 			Modelo = modelo;
 			Ram = ram;
 			Rom = rom;
 			Tamanio = tamanio;
 			Procesador = procesador;
+			Megapixeles = megapixeles;
 		}
 
 		public static bool operator ==(Producto p1, Producto p2)
