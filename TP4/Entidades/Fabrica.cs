@@ -146,11 +146,115 @@ namespace Entidades
         }
 
         /// <summary>
+        /// Guarda un Producto en la base de datos
+        /// </summary>
+        /// <param name="connectionString">la cadena a donde se hará la conexión a la base</param>
+        /// <param name="producto">el producto a guardar</param>
+        /// <returns></returns>
+        public static bool GuardarEnLaBase(string connectionString, Producto producto)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand comando = connection.CreateCommand();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("INSERT INTO Productos (Modelo, Ram, Rom, Tamanio, Procesador, Camara, Tipo) VALUES");
+            stringBuilder.AppendLine("(@modelo, @ram, @rom, @tamanio, @procesador, @camara, @tipo)");
+            
+            comando.CommandType = CommandType.Text;
+            comando.Parameters.AddWithValue("@modelo", producto.Modelo);
+            comando.Parameters.AddWithValue("@ram", producto.Ram);
+            comando.Parameters.AddWithValue("@rom", producto.Rom);
+            comando.Parameters.AddWithValue("@tamanio", producto.Tamanio);
+            comando.Parameters.AddWithValue("@procesador", producto.Procesador);
+            comando.Parameters.AddWithValue("@camara", producto.Megapixeles);
+            comando.Parameters.AddWithValue("@tipo", producto.GetType().Name);
+            comando.CommandText = stringBuilder.ToString();
+
+            try
+            {
+                connection.Open();
+                int registrosInsertados = comando.ExecuteNonQuery();
+                return registrosInsertados == 1;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static Fabrica LeerDeLaBase(string connectionString)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand comando = connection.CreateCommand();
+            StringBuilder stringBuilder = new StringBuilder();
+            Fabrica datosDeLaBase = new Fabrica();
+
+            stringBuilder.AppendLine("SELECT Modelo, Ram, Rom, Tamanio, Procesador, Camara, Tipo FROM Productos");
+            comando.CommandType = CommandType.Text;
+            comando.CommandText = stringBuilder.ToString();
+
+            try
+            {
+                connection.Open();
+                SqlDataReader dataReader = comando.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string modelo = dataReader.GetString(0);
+                    string ram = dataReader.GetString(1);
+                    string rom = dataReader.GetString(2);
+                    string tamanio = dataReader.GetString(3);
+                    string procesador = dataReader.GetString(4);
+                    string camara = dataReader.GetString(5);
+                    string tipo = dataReader.GetString(6);
+                    
+                    switch (tipo.ToLower())
+                    {
+                        case "celular":
+                            datosDeLaBase += new Celular(modelo, ram, rom, camara, tamanio, procesador);
+                            break;
+                        case "tablet":
+                            datosDeLaBase += new Tablet(modelo, ram, rom, camara, procesador);
+                            break;
+                        case "smartwatch":
+                            datosDeLaBase += new SmartWatch(modelo, ram, rom, procesador);
+                            break;
+                        default:
+                            datosDeLaBase += new Producto(dataReader.GetString(0), dataReader.GetString(1), dataReader.GetString(2),
+                                dataReader.GetString(3), dataReader.GetString(4), dataReader.GetString(5));
+                            break;
+                    }
+                }
+
+                return datosDeLaBase;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        /// <summary>
         /// Guarda los Productos de la Fabrica en la base de datos
         /// </summary>
         /// <param name="archivo">la cadena a donde se hará la conexión a la base</param>
         /// <param name="datos">objeto Fabrica de la cual se tomará la información para registrar en la base</param>
         /// <returns></returns>
+        [Obsolete]
         bool IArchivos<Fabrica>.Guardar(string archivo, Fabrica datos)
         {
             SqlConnection connection = new SqlConnection(archivo);
@@ -198,6 +302,7 @@ namespace Entidades
         /// <param name="archivo">la cadena a donde se hará la conexión a la base</param>
         /// <param name="datos">objeto Fabrica de la cual se adjuntará la información tomada de la base</param>
         /// <returns></returns>
+        [Obsolete]
         bool IArchivos<Fabrica>.Leer(string archivo, out Fabrica datos)
         {
             SqlConnection connection = new SqlConnection(archivo);

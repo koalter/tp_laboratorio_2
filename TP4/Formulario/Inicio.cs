@@ -103,8 +103,7 @@ namespace Formulario
 
                 Directory.CreateDirectory(ruta);
                 if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) 
-                    && fabrica.GuardarComoXml(ruta + "\\" + fecha) 
-                    && ((IArchivos<Fabrica>)fabrica).Guardar(connectionString, fabrica))
+                    && fabrica.GuardarComoXml(ruta + "\\" + fecha))
                 {
                     lbxFabrica.Items.Clear();
                     fabrica.Limpiar();
@@ -186,6 +185,10 @@ namespace Formulario
             Thread.Sleep(2000);
             lbxEnCurso.Items.Remove(producto);
             lbxHechos.Items.Add(producto);
+
+            Fabrica.GuardarEnLaBase(connectionString, (Producto)producto);
+            //fabrica.GuardarEnLaBase(producto); //Este metodo no existe como tal, hay que refactorizar IArchivos<Fabrica>.Guardar
+            // Realizar todo el proceso que actualmente se realiza en btnFabricar_Click
         }
     }
 }
