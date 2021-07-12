@@ -17,7 +17,6 @@ namespace Formulario
 {
     public partial class Inicio : Form
     {
-        const string connectionString = "Server=localhost\\SQL2014;Database=Cea.Lorenzo.2A;Trusted_connection=True;";
         Fabrica fabrica;
         List<Thread> hilos;
 
@@ -29,7 +28,26 @@ namespace Formulario
             hilos = new List<Thread>();
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private Producto GenerarProducto(string modelo, string ram, string rom, string camara,
+            string tamanio, string procesador)
+        {
+            switch (lbxProducto.Text.ToLower())
+            {
+                case "celular":
+                    return new Celular(modelo, ram,
+                        rom, camara, tamanio, procesador);
+                case "tablet":
+                    return new Tablet(modelo, ram,
+                        rom, camara, procesador);
+                case "smartwatch":
+                    return new SmartWatch(modelo, ram,
+                        rom, procesador);
+                default:
+                    return null;
+            }
+        }
+
+        private void btnFabricar_Click(object sender, EventArgs e)
         {
             Producto producto;
             Thread thread;
@@ -49,76 +67,6 @@ namespace Formulario
             {
                 MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-        private Producto GenerarProducto(string modelo, string ram, string rom, string camara,
-            string tamanio, string procesador)
-        {
-            if (!procesador.ToLower().Equals("snapdragon") && 
-                !procesador.ToLower().Equals("exynos") &&
-                !procesador.ToLower().Equals("helio"))
-            {
-                procesador = "Generico";
-            }
-
-            switch (lbxProducto.Text.ToLower())
-            {
-                case "celular":
-                    return new Celular(modelo, ram,
-                        rom, camara, tamanio, procesador);
-                case "tablet":
-                    return new Tablet(modelo, ram,
-                        rom, camara, procesador);
-                case "smartwatch":
-                    return new SmartWatch(modelo, ram,
-                        rom, procesador);
-                default:
-                    return null;
-            }
-        }
-
-        private void btnRemover_Click(object sender, EventArgs e)
-        {
-            Producto producto = (Producto)lbxFabrica.SelectedItem;
-            lbxFabrica.Items.Remove(producto);
-            try
-            {
-                fabrica -= producto;
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show("No ha seleccionado ningun objeto!", ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (RemoverObjetoException ex)
-            {
-                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void btnFabricar_Click(object sender, EventArgs e)
-        {
-            if (lbxFabrica.Items.Count != 1)
-            {
-                string fecha = DateTime.Now.ToFileTime().ToString();
-                string ruta = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\{fecha}";
-
-                Directory.CreateDirectory(ruta);
-                if (fabrica.GuardarComoTexto(ruta + "\\" + fecha) 
-                    && fabrica.GuardarComoXml(ruta + "\\" + fecha))
-                {
-                    lbxFabrica.Items.Clear();
-                    fabrica.Limpiar();
-                    MessageBox.Show($"Hecho! Los productos están en {ruta}", "Productos fabricados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Hubo un error al guardar archivos.", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Por favor ingresá aunque sea un producto más. La fabricación y despacho de equipos móviles es muy costosa como para que pidas un solo producto!", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
         }
 
         private void lbxProducto_Click(object sender, EventArgs e)
@@ -151,7 +99,7 @@ namespace Formulario
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            if (Fabrica.TestConnectionString(connectionString) == false)
+            if (Fabrica.TestConnectionString() == false)
             {
                 MessageBox.Show("No se pudo conectar a la base. Asegúrese de que la cadena de conexión tenga sus parámetros correctamente e intente nuevamente.", "Cadena de conexión incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.Close();
@@ -183,12 +131,19 @@ namespace Formulario
             lbxFabrica.Items.Remove(producto);
             lbxEnCurso.Items.Add(producto);
             Thread.Sleep(2000);
-            lbxEnCurso.Items.Remove(producto);
-            lbxHechos.Items.Add(producto);
 
-            Fabrica.GuardarEnLaBase(connectionString, (Producto)producto);
-            //fabrica.GuardarEnLaBase(producto); //Este metodo no existe como tal, hay que refactorizar IArchivos<Fabrica>.Guardar
-            // Realizar todo el proceso que actualmente se realiza en btnFabricar_Click
+            string fecha = DateTime.Now.ToFileTime().ToString();
+            string ruta = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Productos\\{fecha}";
+
+            Directory.CreateDirectory(ruta);
+            if (Fabrica.GuardarComoTexto(ruta + "\\" + fecha, (Producto)producto) &&
+                Fabrica.GuardarComoXml(ruta + "\\" + fecha, (Producto)producto) &&
+                Fabrica.GuardarEnLaBase((Producto)producto))
+            {
+                lbxEnCurso.Items.Remove(producto);
+                lbxHechos.Items.Add(producto);
+            }
+            
         }
     }
 }

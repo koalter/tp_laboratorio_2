@@ -68,10 +68,7 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeGenerarYLeerTexto()
         {
-            Fabrica fabrica = new Fabrica();
             Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
-
-            fabrica += producto;
 
             string rutaDePrueba = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Cea.Lorenzo.2A.TPFinal.UnitTest";
             string archivo = rutaDePrueba + "\\DebeGenerarYLeerTexto.txt";
@@ -79,8 +76,8 @@ namespace Unit.Tests
 
             try
             {
-                Assert.IsTrue(fabrica.GuardarComoTexto(rutaDePrueba + "\\DebeGenerarYLeerTexto"));
-                Assert.AreEqual(fabrica.ToString(), fabrica.LeerArchivoTexto(archivo));
+                Assert.IsTrue(Fabrica.GuardarComoTexto(rutaDePrueba + "\\DebeGenerarYLeerTexto", producto));
+                Assert.AreEqual(producto.ToString(), Fabrica.LeerArchivoTexto(archivo));
             }
             finally
             {
@@ -96,52 +93,25 @@ namespace Unit.Tests
         [TestMethod]
         public void DebeGenerarYLeerXml()
         {
-            Fabrica fabrica = new Fabrica();
-            Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
-
-            fabrica += producto;
-
+            Celular producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
+            
             string rutaDePrueba = $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\Cea.Lorenzo.2A.TPFinal.UnitTest";
             string archivo = rutaDePrueba + "\\DebeGenerarYLeerXml.xml";
             Directory.CreateDirectory(rutaDePrueba);
 
             try
             {
-                Assert.IsTrue(fabrica.GuardarComoXml(rutaDePrueba + "\\DebeGenerarYLeerXml"));
+                Assert.IsTrue(Fabrica.GuardarComoXml(rutaDePrueba + "\\DebeGenerarYLeerXml", producto));
 
-                List<Producto> listaRecuperadaDeProductos = fabrica.LeerArchivoXml(archivo);
+                Producto productoRecuperadoXml = Fabrica.LeerArchivoXml(archivo);
 
-                Assert.IsTrue(listaRecuperadaDeProductos != null && listaRecuperadaDeProductos.Count == 1);
-                Assert.IsTrue(listaRecuperadaDeProductos[0] == producto);
+                Assert.IsTrue(!(productoRecuperadoXml is null));
+                Assert.IsTrue(productoRecuperadoXml == producto);
             }
             finally
             {
                 Directory.Delete(rutaDePrueba, true);
             }
-        }
-
-        /// <summary>
-        /// Test unitario para probar que arroje AgregarObjetoException
-        /// </summary>
-        [TestMethod]
-        public void DebeImpedirAgregarDuplicados()
-        {
-            Fabrica fabrica = new Fabrica();
-            Producto producto = new Celular("testModel", "1", "16", "13", ETamanio.Chico.ToString(), EMarca.Generico.ToString());
-            bool arrojaExcepcion = false;
-
-            fabrica += producto;
-
-            try
-            {
-                fabrica += producto;
-            }
-            catch (AgregarObjetoException)
-            {
-                arrojaExcepcion = true;
-            }
-
-            Assert.IsTrue(arrojaExcepcion);
         }
 
         /// <summary>
@@ -184,6 +154,12 @@ namespace Unit.Tests
             }
 
             Assert.IsTrue(arrojaExcepcion);
+        }
+
+        [TestMethod]
+        public void TestConnectionString()
+        {
+            Assert.IsTrue(Fabrica.TestConnectionString());
         }
     }
 }

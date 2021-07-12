@@ -30,8 +30,6 @@ namespace Formulario
         private void InitializeComponent()
         {
             this.lbxFabrica = new System.Windows.Forms.ListBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnRemover = new System.Windows.Forms.Button();
             this.btnFabricar = new System.Windows.Forms.Button();
             this.lblModelo = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
@@ -63,31 +61,11 @@ namespace Formulario
             this.lbxFabrica.Size = new System.Drawing.Size(414, 52);
             this.lbxFabrica.TabIndex = 0;
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(19, 203);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(100, 30);
-            this.btnAgregar.TabIndex = 1;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnRemover
-            // 
-            this.btnRemover.Location = new System.Drawing.Point(148, 203);
-            this.btnRemover.Name = "btnRemover";
-            this.btnRemover.Size = new System.Drawing.Size(100, 30);
-            this.btnRemover.TabIndex = 2;
-            this.btnRemover.Text = "Remover";
-            this.btnRemover.UseVisualStyleBackColor = true;
-            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
-            // 
             // btnFabricar
             // 
-            this.btnFabricar.Location = new System.Drawing.Point(277, 203);
+            this.btnFabricar.Location = new System.Drawing.Point(19, 203);
             this.btnFabricar.Name = "btnFabricar";
-            this.btnFabricar.Size = new System.Drawing.Size(100, 30);
+            this.btnFabricar.Size = new System.Drawing.Size(358, 30);
             this.btnFabricar.TabIndex = 3;
             this.btnFabricar.Text = "Fabricar";
             this.btnFabricar.UseVisualStyleBackColor = true;
@@ -316,8 +294,6 @@ namespace Formulario
             this.Controls.Add(this.txtModelo);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.btnFabricar);
-            this.Controls.Add(this.btnRemover);
-            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.lbxFabrica);
             this.Name = "Inicio";
             this.Text = "Lorenzo Nahuel Cea Ko, 2A";
@@ -331,8 +307,6 @@ namespace Formulario
         #endregion
 
         private System.Windows.Forms.ListBox lbxFabrica;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnRemover;
         private System.Windows.Forms.Button btnFabricar;
         private System.Windows.Forms.Label lblModelo;
         private System.Windows.Forms.TextBox txtModelo;

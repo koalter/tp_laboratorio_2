@@ -33,22 +33,12 @@ namespace Test
             catch (ValorInvalidoException e)
             {
                 Console.WriteLine(e.Message);
-                productoInvalido = null;
             }
 
             fabrica += c1;
             fabrica += t1;
             fabrica += s1;
 
-            // No deberia dejar agregar estos objetos
-            try
-            {
-                fabrica += productoInvalido;
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message);
-            }
             try
             {
                 fabrica += null;
@@ -64,16 +54,7 @@ namespace Test
             Console.ReadLine();
             Console.Clear();
 
-            // Deberia remover t1 e impedir agregar c1 de nuevo al estar ya incluido en la fabrica
             fabrica -= t1;
-            try
-            {
-                fabrica += c1;
-            }
-            catch (AgregarObjetoException e)
-            {
-                Console.WriteLine(e.Message);
-            }
 
             fabrica += c2;
 
@@ -101,28 +82,40 @@ namespace Test
 
             Console.WriteLine("PROBANDO GuardarComoTexto");
             Directory.CreateDirectory(archivo);
-            fabrica.GuardarComoTexto(archivo + "\\test");
+            Fabrica.GuardarComoTexto(archivo + "\\test", c1);
             
             Console.WriteLine();
-            Console.WriteLine(fabrica.LeerArchivoTexto(archivo + "\\test.txt"));
+            Console.WriteLine(Fabrica.LeerArchivoTexto(archivo + "\\test.txt"));
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();
 
             Console.WriteLine("PROBANDO GuardarComoXml");
             Directory.CreateDirectory(archivo);
-            fabrica.GuardarComoXml(archivo + "\\test");
-
-            fabrica.Limpiar();
-
-            List<Producto> nuevaListaDeProductos = new List<Producto>(fabrica.LeerArchivoXml(archivo + "\\test.xml"));
-
-            foreach (Producto producto in nuevaListaDeProductos)
-            {
-                fabrica += producto;
-            }
+            Fabrica.GuardarComoXml(archivo + "\\test", c2);
 
             Console.WriteLine();
-            Console.WriteLine(fabrica);
+            Console.WriteLine(Fabrica.LeerArchivoXml(archivo + "\\test.xml"));
+            Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("PROBANDO GuardarEnLaBase");
+            Console.Write("Conectando a la base...");
+            
+            if (Fabrica.GuardarEnLaBase(new Tablet("tablet-test-consola", "2", "32", "16", "un procesador cualquiera")))
+            {
+                Console.WriteLine("Conexión exitosa");
+                Console.WriteLine();
+                Console.WriteLine(Fabrica.LeerDeLaBase().ToString());
+            }
+            else
+            {
+                Console.WriteLine("ERROR AL CONECTAR A LA BASE");
+                Console.WriteLine();
+                Console.WriteLine("Verifique que connectionString este correctamente configurado en la clase Fabrica");
+                Console.WriteLine();
+            }
+
             Console.WriteLine("<-------------------PRESIONE UNA TECLA PARA CONTINUAR------------------->");
             Console.ReadLine();
         }

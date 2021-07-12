@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgregarObjetoException.cs" />
     <Compile Include="RemoverObjetoException.cs" />
     <Compile Include="ValorInvalidoException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

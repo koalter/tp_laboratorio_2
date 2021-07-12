@@ -46,11 +46,7 @@ namespace Entidades
 			}
 			set
 			{
-				if (!Enum.TryParse(value, out EMarca procesador))
-				{
-					throw new ValorInvalidoException("Procesador");
-				}
-				_procesador = procesador;
+				_procesador = value.ToEMarca();
 			}
 		}
 
