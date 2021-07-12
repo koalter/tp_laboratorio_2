@@ -126,10 +126,19 @@ namespace Formulario
 
         private void CambiarEstado(object producto)
         {
-            lbxFabrica.Items.Add(producto);
+            lbxFabrica.Invoke((MethodInvoker)delegate ()
+            {
+                lbxFabrica.Items.Add(producto);
+            });
             Thread.Sleep(2000);
-            lbxFabrica.Items.Remove(producto);
-            lbxEnCurso.Items.Add(producto);
+            lbxFabrica.Invoke((MethodInvoker)delegate ()
+            {
+                lbxFabrica.Items.Remove(producto);
+            });
+            lbxEnCurso.Invoke((MethodInvoker)delegate ()
+            {
+                lbxEnCurso.Items.Add(producto);
+            });
             Thread.Sleep(2000);
 
             string fecha = DateTime.Now.ToFileTime().ToString();
@@ -140,8 +149,14 @@ namespace Formulario
                 Fabrica.GuardarComoXml(ruta + "\\" + fecha, (Producto)producto) &&
                 Fabrica.GuardarEnLaBase((Producto)producto))
             {
-                lbxEnCurso.Items.Remove(producto);
-                lbxHechos.Items.Add(producto);
+                lbxEnCurso.Invoke((MethodInvoker)delegate ()
+                {
+                    lbxEnCurso.Items.Remove(producto);
+                });
+                lbxHechos.Invoke((MethodInvoker)delegate ()
+                {
+                    lbxHechos.Items.Add(producto);
+                });
             }
             
         }

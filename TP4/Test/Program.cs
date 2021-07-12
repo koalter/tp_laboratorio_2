@@ -38,15 +38,7 @@ namespace Test
             fabrica += c1;
             fabrica += t1;
             fabrica += s1;
-
-            try
-            {
-                fabrica += null;
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            fabrica += null; //No deberia hacer nada
 
             Console.WriteLine();
             Console.WriteLine(fabrica.ToString());

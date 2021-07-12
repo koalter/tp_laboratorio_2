@@ -156,10 +156,24 @@ namespace Unit.Tests
             Assert.IsTrue(arrojaExcepcion);
         }
 
+        /// <summary>
+        /// Test unitario para probar la conexión a la base.
+        /// </summary>
         [TestMethod]
         public void TestConnectionString()
         {
-            Assert.IsTrue(Fabrica.TestConnectionString());
+            Assert.IsTrue(Fabrica.TestConnectionString(), "No se pudo conectar a la base de datos.");
+        }
+
+        /// <summary>
+        /// Test unitario para probar que se inserte un registro exitosamente.
+        /// </summary>
+        [TestMethod]
+        public void DebeInsertarUnRegistroEnLaBase()
+        {
+            Celular testCelular = new Celular("DebeInsertarUnRegistroEnLaBase", "4", "64", "13", ETamanio.Mediano.ToString(), EMarca.Snapdragon.ToString());
+
+            Assert.IsTrue(Fabrica.GuardarEnLaBase(testCelular), "No se pudo guardar el registro en la base de datos.");
         }
     }
 }

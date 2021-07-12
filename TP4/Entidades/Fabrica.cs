@@ -17,7 +17,7 @@ namespace Entidades
     /// <typeparam name="T">Tipo de objeto que va a contener la Fabrica</typeparam>
 	public class Fabrica
 	{
-        private static string connectionString = @"Data Source=localhost\SQL2014;Initial Catalog=Cea.Lorenzo.2A;Integrated Security=true;";
+        private static string connectionString = @"Data Source=.;Initial Catalog=Cea.Lorenzo.2A;Integrated Security=true;";
 
         private List<Producto> lista;
         public event CambioStatus CambiarStatusEvent;
@@ -53,9 +53,10 @@ namespace Entidades
         /// <param name="obj"></param>
         private void Agregar(Producto obj)
         {
-            if (obj is null) throw new NullReferenceException("No hay objeto para agregar!");
-
-            this.lista.Add(obj);
+            if (!(obj is null))
+            {
+                this.lista.Add(obj);
+            }
         }
 
         /// <summary>
