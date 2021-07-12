@@ -1,9 +1,7 @@
 ﻿using Excepciones;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Archivos;
 using System.Data;
 using System.Data.SqlClient;
